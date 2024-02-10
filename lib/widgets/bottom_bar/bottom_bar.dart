@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'bottom_button.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});
@@ -14,7 +15,7 @@ class BottomBar extends StatelessWidget {
         'name': 'save'
       },
       {
-        'icon': Icons.mic,
+        'icon': Icons.mic_none_rounded,
         'onTap': () {
           print('mic');
         },
@@ -37,39 +38,22 @@ class BottomBar extends StatelessWidget {
     ];
 
     return Container(
-      height: 100,
+      // height: 100,
       decoration: const BoxDecoration(
-        color: Colors.white,
+        border: Border(
+            // top: BorderSide(color: Colors.grey.shade300, width: 2),
+            ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: itemsList.map((item) {
-          return _menuItem(context,
-              name: item['name'] as String,
-              icon: item['icon'] as IconData,
-              onTap: item['onTap'] as Function());
+          return BottomButton(
+            name: item['name'] as String,
+            icon: item['icon'] as IconData,
+            onTap: item['onTap'] as Function(),
+            select: item['name'] == 'mic',
+          );
         }).toList(),
-      ),
-    );
-  }
-
-  Widget _menuItem(
-    BuildContext context, {
-    required Function() onTap,
-    required IconData icon,
-    required String name,
-  }) {
-    final double itemWidth = MediaQuery.of(context).size.width / 4;
-
-    return InkWell(
-      onTap: onTap,
-      child: SizedBox(
-        width: itemWidth,
-        child: Icon(
-          icon,
-          color: Colors.grey,
-          size: 40,
-        ),
       ),
     );
   }

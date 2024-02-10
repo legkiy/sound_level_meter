@@ -10,10 +10,13 @@ class SoundLeveMeter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Sound Level Meter',
-      home: HomeScreen(),
+      theme: ThemeData(
+        fontFamily: 'PT_Sans',
+      ),
+      home: const HomeScreen(),
     );
   }
 }

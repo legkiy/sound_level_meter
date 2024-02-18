@@ -8,9 +8,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HeadBar,
+      appBar: HeadBar(context),
       body: const SafeArea(
-          minimum: EdgeInsets.symmetric(horizontal: 14), child: HomeMain()),
+        child: HomeMain(),
+      ),
       bottomNavigationBar: const BottomBar(),
     );
   }

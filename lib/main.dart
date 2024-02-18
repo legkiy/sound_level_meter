@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sound_level_meter/routes/routes.dart';
 import 'package:sound_level_meter/screens/screens.dart';
 
 void main() {
@@ -16,7 +17,13 @@ class SoundLeveMeter extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'PT_Sans',
       ),
-      home: const HomeScreen(),
+      routes: {
+        Routes.home: (context) => const HomeScreen(),
+        Routes.savesScreen: (context) => const SavesScreen(),
+        Routes.infoScreen: (context) => const InfoScreen(),
+        Routes.settingsScreen: (context) => const SettingsScreen(),
+      },
+      initialRoute: Routes.home,
     );
   }
 }

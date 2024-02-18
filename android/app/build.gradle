@@ -24,7 +24,9 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.example.sound_level_meter"
-    compileSdkVersion flutter.compileSdkVersion
+    // compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 33
+
     ndkVersion flutter.ndkVersion
 
     compileOptions {

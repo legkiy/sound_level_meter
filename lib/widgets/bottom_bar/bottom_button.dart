@@ -10,24 +10,31 @@ class BottomButton extends StatelessWidget {
     required this.onTap,
     required this.icon,
     required this.name,
-    this.select = false,
+    required this.select,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final double itemWidth = MediaQuery.of(context).size.width / 4;
+
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        onTap();
+        if (!select) {
+          Navigator.of(context).pushNamed('/$name');
+        }
+      },
       borderRadius: const BorderRadius.vertical(
         top: Radius.circular(20),
       ),
       child: SizedBox(
         width: itemWidth,
-        height: 100,
+        height: 120,
         child: Container(
+          padding: const EdgeInsets.only(bottom: 20),
           decoration: BoxDecoration(
-            color: select ? Colors.grey.shade300 : null,
+            color: select ? Colors.grey.shade300 : Colors.transparent,
             borderRadius: const BorderRadius.vertical(
               top: Radius.circular(20),
             ),
@@ -35,11 +42,10 @@ class BottomButton extends StatelessWidget {
           child: Icon(
             icon,
             color: select ? Colors.green : Colors.grey,
-            size: 50,
+            size: 40,
           ),
         ),
       ),
     );
-    ;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'bottom_button.dart';
 
 class BottomBar extends StatelessWidget {
@@ -6,43 +7,30 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String? currentRoute = ModalRoute.of(context)?.settings.name;
+
     final List<Map<String, Object>> itemsList = [
-      {
-        'icon': Icons.save_outlined,
-        'onTap': () {
-          print('save');
-        },
-        'name': 'save'
-      },
+      {'icon': Icons.save_outlined, 'onTap': () {}, 'name': 'saves'},
       {
         'icon': Icons.mic_none_rounded,
-        'onTap': () {
-          print('mic');
+        'onTap': () async {
+          bool micIsOff = await Permission.microphone.status.isDenied;
+          if (micIsOff) {
+            await Permission.microphone.request();
+          } else {
+            print(await Permission.microphone.status);
+          }
         },
-        'name': 'mic'
+        'name': ''
       },
-      {
-        'icon': Icons.list_rounded,
-        'onTap': () {
-          print('list');
-        },
-        'name': 'list'
-      },
-      {
-        'icon': Icons.timer_outlined,
-        'onTap': () {
-          print('timer');
-        },
-        'name': 'timer'
-      }
+      {'icon': Icons.list_rounded, 'onTap': () {}, 'name': 'saves-list'},
+      {'icon': Icons.timer_outlined, 'onTap': () {}, 'name': 'timer'}
     ];
 
     return Container(
-      // height: 100,
+      height: 100,
       decoration: const BoxDecoration(
-        border: Border(
-            // top: BorderSide(color: Colors.grey.shade300, width: 2),
-            ),
+        border: Border(),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +39,7 @@ class BottomBar extends StatelessWidget {
             name: item['name'] as String,
             icon: item['icon'] as IconData,
             onTap: item['onTap'] as Function(),
-            select: item['name'] == 'mic',
+            select: currentRoute == '/${item['name']}',
           );
         }).toList(),
       ),

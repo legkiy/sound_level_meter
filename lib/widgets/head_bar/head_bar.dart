@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sound_level_meter/routes/routes.dart';
 
 // ignore: non_constant_identifier_names
-AppBar HeadBar(BuildContext context) {
+AppBar HeadBar({required BuildContext context, required Function goToRoute}) {
   return AppBar(
     title: const Text(
       'Sound Level Meter',
@@ -16,7 +17,9 @@ AppBar HeadBar(BuildContext context) {
         color: Colors.grey,
       ),
       onPressed: () {
-        Navigator.pushNamed(context, '/info');
+        goToRoute(Routes.infoScreen);
+
+        // Navigator.pushNamed(context, '/info');
       },
     ),
     actions: [
@@ -24,7 +27,9 @@ AppBar HeadBar(BuildContext context) {
         padding: const EdgeInsets.only(right: 4),
         child: IconButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/settings');
+            goToRoute(Routes.settingsScreen);
+
+            // Navigator.pushNamed(context, '/settings');
           },
           icon: const Icon(
             Icons.settings_sharp,

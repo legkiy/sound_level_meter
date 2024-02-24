@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:noise_meter/noise_meter.dart';
@@ -28,7 +27,7 @@ class _HomeMainState extends State<HomeMain> {
 
   @override
   void initState() {
-    start();
+    // start();
     super.initState();
     // Инициализация состояния
   }
@@ -37,7 +36,7 @@ class _HomeMainState extends State<HomeMain> {
       setState(() => latestReading = noiseReading);
 
   void onError(Object error) {
-    print(error.toString());
+    print('sound streem error:${error.toString()}');
     stop();
   }
 
@@ -101,9 +100,8 @@ class _HomeMainState extends State<HomeMain> {
               TextButton(
                   onPressed: () {
                     stop();
-                    start();
                   },
-                  child: Text('restart'))
+                  child: Text('stop'))
               // SizedBox(
               //   height: 50,
               //   child: VerticalDivider(

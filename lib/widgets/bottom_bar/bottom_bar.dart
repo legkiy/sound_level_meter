@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:sound_level_meter/routes/routes.dart';
 import 'bottom_button.dart';
 
 class BottomBar extends StatelessWidget {
-  const BottomBar({super.key});
+  final Function goToRoute;
+  final String currentRoute;
+
+  const BottomBar(this.goToRoute, this.currentRoute, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    final String? currentRoute = ModalRoute.of(context)?.settings.name;
+    // final String? currentRoute = ModalRoute.of(context)?.settings.name;
 
     final List<Map<String, Object>> itemsList = [
-      {'icon': Icons.save_outlined, 'onTap': () {}, 'name': 'saves'},
+      {'icon': Icons.save_outlined, 'onTap': () {}, "path": 'memo'},
       {
         'icon': Icons.mic_none_rounded,
         'onTap': () async {
@@ -21,10 +25,10 @@ class BottomBar extends StatelessWidget {
             print(await Permission.microphone.status);
           }
         },
-        'name': ''
+        "path": Routes.home
       },
-      {'icon': Icons.list_rounded, 'onTap': () {}, 'name': 'saves-list'},
-      {'icon': Icons.timer_outlined, 'onTap': () {}, 'name': 'timer'}
+      {'icon': Icons.list_rounded, 'onTap': () {}, "path": Routes.savesScreen},
+      {'icon': Icons.timer_outlined, 'onTap': () {}, "path": 'timer'}
     ];
 
     return Container(
@@ -36,10 +40,13 @@ class BottomBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: itemsList.map((item) {
           return BottomButton(
-            name: item['name'] as String,
+            goToRoute: goToRoute,
             icon: item['icon'] as IconData,
-            onTap: item['onTap'] as Function(),
-            select: currentRoute == '/${item['name']}',
+            path: item['path'] as String,
+            onTap: () {
+              item['onTap'];
+            },
+            currentRoute: currentRoute,
           );
         }).toList(),
       ),
